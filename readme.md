@@ -1,4 +1,4 @@
-# Australian Capital Teritory Garbage/Recycling/Greenwaste Pickup
+# Australian Capital Territory Garbage/Recycling/Greenwaste Pickup
 [![hacs_badge](https://img.shields.io/badge/HACS-Default-orange.svg?style=for-the-badge)](https://github.com/custom-components/hacs)
 
 _Creates sensors for Home Assistant with the collection information for the bins within a suburb in the ACT_
