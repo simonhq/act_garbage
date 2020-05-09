@@ -62,7 +62,7 @@ class Get_ACT_Garbage(hass.Hass):
         self.load()
 
         # listen to HA for the flag to update the sensor
-        self.listen_state(self.main, self.DAM_FLAG, new="on")
+        self.listen_state(self.main, self.GAR_FLAG, new="on")
 
     # run the app
     def main(self, entity, attribute, old, new, kwargs):
