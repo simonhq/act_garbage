@@ -68,12 +68,18 @@ key | optional | type | default | description
 
 ## Sensors Created
 
-This version will create 4 sensors
+This version will create 4 sensors & 6 binary sensors
 
 * sensor.act_garbage_last_updated
 * sensor.act_garbage_pickup
 * sensor.act_recycling_pickup
 * sensor.act_greenwaste_pickup
+* binary_sensor.act_garbage_today
+* binary_sensor.act_garbage_tomorrow
+* binary_sensor.act_recycling_today
+* binary_sensor.act_recycling_tomorrow
+* binary_sensor.act_greenwaste_today
+* binary_sensor.act_greenwaste_tomorrow
 
 ## Issues/Feature Requests
 
