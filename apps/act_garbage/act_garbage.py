@@ -16,7 +16,7 @@
 # act_garbage:
 #   module: act_garbage
 #   class: Get_ACT_Garbage
-#   DAM_FLAG: "input_boolean.check_act_garbage"
+#   GAR_FLAG: "input_boolean.check_act_garbage"
 #   SUBURB: "CITY"
 #   SPLIT_SUBURB: ""
 #
@@ -89,7 +89,7 @@ class Get_ACT_Garbage(hass.Hass):
         self.set_state(self.up_sensor, state=date_time, replace=True, attributes= {"icon": "mdi:timeline-clock-outline", "friendly_name": "Bin Data last sourced"})
 
         #convert to json
-        jtags = json.loads(response)
+        jtags = json.loads(response.text)
         
         #parse the data for the suburb
         for suburbs in jtags:

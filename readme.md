@@ -53,7 +53,7 @@ In the apps.yaml file in the appdaemon/apps directory -
 act_garbage:
   module: act_garbage
   class: Get_ACT_Garbage
-  DAM_FLAG: "input_boolean.check_act_garbage"
+  GAR_FLAG: "input_boolean.check_act_garbage"
   SUBURB: "CITY"
   SPLIT_SUBURB: ""
 ```
