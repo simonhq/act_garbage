@@ -41,6 +41,13 @@ class Get_ACT_Garbage(hass.Hass):
     recy_sensor = "sensor.act_recycling_pickup"
     green_sensor = "sensor.act_greenwaste_pickup"
     
+    bin_bin_tod = "binary_sensor.act_garbage_today"
+    bin_bin_tom = "binary_sensor.act_garbage_tomorrow"
+    rec_bin_tod = "binary_sensor.act_recycling_today"
+    rec_bin_tom = "binary_sensor.act_recycling_tomorrow"
+    gre_bin_tod = "binary_sensor.act_greenwaste_today"
+    gre_bin_tom = "binary_sensor.act_greenwaste_tomorrow"
+
     bin_mdi = "mdi:trash-can-outline"
     recy_mdi = "mdi:recycle"
     green_mdi = "mdi:pine-tree-box"
@@ -55,8 +62,8 @@ class Get_ACT_Garbage(hass.Hass):
 
         # get the values from the app.yaml that has the relevant personal settings
         self.GAR_FLAG = self.args["GAR_FLAG"]
-        self.SUBURB = self.args["SUBURB"]
-        self.SPLIT_SUBURB = self.args["SPLIT_SUBURB"]
+        self.SUBURB = self.args["SUBURB"].upper()
+        self.SPLIT_SUBURB = self.args["SPLIT_SUBURB"].capitalize()
 
         # create the original sensor
         self.load()
@@ -86,8 +93,17 @@ class Get_ACT_Garbage(hass.Hass):
         #create a sensor to keep track last time this was run
         tim = datetime.datetime.now()
         date_time = tim.strftime("%d/%m/%Y, %H:%M:%S")
+        date_date = tim.strftime("%d/%m/%Y")
         self.set_state(self.up_sensor, state=date_time, replace=True, attributes= {"icon": "mdi:timeline-clock-outline", "friendly_name": "Bin Data last sourced"})
 
+        #create the binary sensors
+        self.set_state(self.bin_bin_tod, replace=True, attributes= {"icon": self.bin_mdi, "friendly_name": "Bin Pickup Today", "value_template": "{{ is_state('" + self.bin_sensor + "', '" + date_date + "') }}" })
+        self.set_state(self.bin_bin_tom, replace=True, attributes= {"icon": self.bin_mdi, "friendly_name": "Bin Pickup Tomorrow", "value_template": "{{ is_state('" + self.bin_sensor + "', '" + date_date + "') }}" })
+        self.set_state(self.rec_bin_tod, replace=True, attributes= {"icon": self.recy_mdi, "friendly_name": "Recycling Pickup Today", "value_template": "{{ is_state('" + self.recy_sensor + "', '" + date_date + "') }}" })
+        self.set_state(self.rec_bin_tom, replace=True, attributes= {"icon": self.recy_mdi, "friendly_name": "Recycling Pickup Tomorrow", "value_template": "{{ is_state('" + self.recy_sensor + "', '" + date_date + "') }}" })
+        self.set_state(self.gre_bin_tod, replace=True, attributes= {"icon": self.green_mdi, "friendly_name": "Green Waste Pickup Today", "value_template": "{{ is_state('" + self.green_sensor + "', '" + date_date + "') }}" })
+        self.set_state(self.gre_bin_tom, replace=True, attributes= {"icon": self.green_mdi, "friendly_name": "Green Waste Pickup Tomorrow", "value_template": "{{ is_state('" + self.green_sensor + "', '" + date_date + "') }}" })
+    
         #convert to json
         jtags = json.loads(response.text)
         
@@ -103,6 +119,11 @@ class Get_ACT_Garbage(hass.Hass):
                 
             if this_sub == True:
                 #create the sensors for each of bin type
-                self.set_state(self.bin_sensor, state=str(suburbs["garbage_pickup_date"]), replace=True, attributes= {"icon": self.bin_mdi, "friendly_name": "Next Garbage Pickup", "Day": str(suburbs["garbage_collection_day"])})
-                self.set_state(self.recy_sensor, state=str(suburbs["recycling_pickup_date"]), replace=True, attributes= {"icon": self.recy_mdi, "friendly_name": "Next Recycling Pickup", "Day": str(suburbs["recycling_collection_day"])})
-                self.set_state(self.green_sensor, state=str(suburbs["next_greenwaste_date"]), replace=True, attributes= {"icon": self.green_mdi, "friendly_name": "Next Greenwaste Pickup", "Day": str(suburbs["greenwaste_collection_day"])})
+                self.set_state(self.bin_sensor, state=str(suburbs["garbage_pickup_date"]), replace=True, attributes= {"icon": self.bin_mdi, "friendly_name": "Next Garbage Pickup", "Day": str(suburbs["garbage_collection_day"]), "Collection Week": str(suburbs["collection_week"]) })
+                self.set_state(self.recy_sensor, state=str(suburbs["recycling_pickup_date"]), replace=True, attributes= {"icon": self.recy_mdi, "friendly_name": "Next Recycling Pickup", "Day": str(suburbs["recycling_collection_day"]), "Collection Week": str(suburbs["collection_week"])})
+                self.set_state(self.green_sensor, state=str(suburbs["next_greenwaste_date"]), replace=True, attributes= {"icon": self.green_mdi, "friendly_name": "Next Greenwaste Pickup", "Day": str(suburbs["greenwaste_collection_day"]), "Collection Week": str(suburbs["greenwaste_collection_week"])})
+            else:
+                #clear the sensors so that they no an error has occured
+                self.set_state(self.bin_sensor, state="No Suburb", replace=True, attributes= {"icon": self.bin_mdi, "friendly_name": "Next Garbage Pickup" })
+                self.set_state(self.recy_sensor, state="No Suburb", replace=True, attributes= {"icon": self.recy_mdi, "friendly_name": "Next Recycling Pickup" })
+                self.set_state(self.green_sensor, state="No Suburb", replace=True, attributes= {"icon": self.green_mdi, "friendly_name": "Next Greenwaste Pickup"})
