@@ -121,7 +121,6 @@ class Get_ACT_Garbage(hass.Hass):
                 self.set_state(self.green_sensor, state=str(suburbs["next_greenwaste_date"]), replace=True, attributes= {"icon": self.green_mdi, "friendly_name": "Next Greenwaste Pickup", "Day": str(suburbs["greenwaste_collection_day"]), "Collection Week": str(suburbs["greenwaste_collection_week"])})
             
                 #binary values for bin
-                self.log(self.bin_sensor + " " + date_date + " " + tomorrow_date)
                 if str(suburbs["garbage_pickup_date"]) == date_date: 
                     bin_tod_state = True
                     bin_tom_state = False
