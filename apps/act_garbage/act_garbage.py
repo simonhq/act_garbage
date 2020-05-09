@@ -104,5 +104,5 @@ class Get_ACT_Garbage(hass.Hass):
             if this_sub == True:
                 #create the sensors for each of bin type
                 self.set_state(self.bin_sensor, state=str(suburbs["garbage_pickup_date"]), replace=True, attributes= {"icon": self.bin_mdi, "friendly_name": "Next Garbage Pickup", "Day": str(suburbs["garbage_collection_day"])})
-                self.set_state(self.recy_sensor, state=str(suburbs["recycling_pickup_date"]), replace=True, attributes= {"icon": self.recy_mdi, "friendly_name": "Next Recycling Pickup", "Day": str(suburbs["recyling_collection_day"])})
+                self.set_state(self.recy_sensor, state=str(suburbs["recycling_pickup_date"]), replace=True, attributes= {"icon": self.recy_mdi, "friendly_name": "Next Recycling Pickup", "Day": str(suburbs["recycling_collection_day"])})
                 self.set_state(self.green_sensor, state=str(suburbs["next_greenwaste_date"]), replace=True, attributes= {"icon": self.green_mdi, "friendly_name": "Next Greenwaste Pickup", "Day": str(suburbs["greenwaste_collection_day"])})
