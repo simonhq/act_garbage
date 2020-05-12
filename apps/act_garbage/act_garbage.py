@@ -122,34 +122,34 @@ class Get_ACT_Garbage(hass.Hass):
             
                 #binary values for bin
                 if str(suburbs["garbage_pickup_date"]) == date_date: 
-                    bin_tod_state = True
-                    bin_tom_state = False
+                    bin_tod_state = 'on'
+                    bin_tom_state = 'off'
                 elif str(suburbs["garbage_pickup_date"]) == tomorrow_date: 
-                    bin_tod_state = False
-                    bin_tom_state = True
+                    bin_tod_state = 'off'
+                    bin_tom_state = 'on'
                 else:
-                    bin_tod_state = False
-                    bin_tom_state = False
+                    bin_tod_state = 'off'
+                    bin_tom_state = 'off'
                 #binary values for rec
                 if str(suburbs["recycling_pickup_date"]) == date_date:
-                    rec_tod_state = True
-                    rec_tom_state = False
+                    rec_tod_state = 'on'
+                    rec_tom_state = 'off'
                 elif str(suburbs["recycling_pickup_date"]) == tomorrow_date:
-                    rec_tod_state = False
-                    rec_tom_state = True
+                    rec_tod_state = 'off'
+                    rec_tom_state = 'on'
                 else:
-                    rec_tod_state = False
-                    rec_tom_state = False
+                    rec_tod_state = 'off'
+                    rec_tom_state = 'off'
                 #binary values for greenwaste
                 if str(suburbs["next_greenwaste_date"]) == date_date:
-                    gre_tod_state = True
-                    gre_tom_state = False
+                    gre_tod_state = 'on'
+                    gre_tom_state = 'off'
                 elif str(suburbs["next_greenwaste_date"]) == tomorrow_date:
-                    gre_tod_state = False
-                    gre_tom_state = True
+                    gre_tod_state = 'off'
+                    gre_tom_state = 'on'
                 else:
-                    gre_tod_state = False
-                    gre_tom_state = False
+                    gre_tod_state = 'off'
+                    gre_tom_state = 'off'
 
         #if nothing can be found
         if sub_found == False:
@@ -157,12 +157,12 @@ class Get_ACT_Garbage(hass.Hass):
             self.set_state(self.bin_sensor, state="No Suburb", replace=True, attributes= {"icon": self.bin_mdi, "friendly_name": "Next Garbage Pickup" })
             self.set_state(self.recy_sensor, state="No Suburb", replace=True, attributes= {"icon": self.recy_mdi, "friendly_name": "Next Recycling Pickup" })
             self.set_state(self.green_sensor, state="No Suburb", replace=True, attributes= {"icon": self.green_mdi, "friendly_name": "Next Greenwaste Pickup"})
-            bin_tod_state = False
-            bin_tom_state = False
-            rec_tod_state = False
-            rec_tom_state = False
-            gre_tod_state = False
-            gre_tom_state = False
+            bin_tod_state = 'off'
+            bin_tom_state = 'off'
+            rec_tod_state = 'off'
+            rec_tom_state = 'off'
+            gre_tod_state = 'off'
+            gre_tom_state = 'off'
 
 
         #finally create the binary sensors
