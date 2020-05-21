@@ -73,7 +73,7 @@ class Get_ACT_Garbage(hass.Hass):
 
         # set to run each morning at 5.27am
         runtime = datetime.time(5,27,0)
-        self.run_daily(self.load, runtime)
+        self.run_daily(self.daily_load, runtime)
 
     # run the app
     def main(self, entity, attribute, old, new, kwargs):
@@ -85,6 +85,13 @@ class Get_ACT_Garbage(hass.Hass):
         
         # turn off the flag in HA to show completion
         self.turn_off(self.GAR_FLAG)
+
+    # run the app
+    def daily_load(self, kwargs):
+        """ scheduled run
+        """
+        # create the sensor with the dam information 
+        self.load()
 
     def load(self):
         """ parse the ACT Open Data JSON dataset
