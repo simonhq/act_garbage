@@ -32,7 +32,7 @@ Please add the following packages to your appdaemon 4 configuration on the super
 
 ``` yaml
 system_packages: []
-python_packages:
+python_packages: []
 init_commands: []
 ```
 
