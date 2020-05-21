@@ -12,20 +12,15 @@ _Creates sensors for Home Assistant with the collection information for the bins
 
 ## Installation
 
-This app is best installed using
-[HACS](https://github.com/custom-components/hacs), so that you can easily track
-and download updates.
+This app is best installed using [HACS](https://github.com/custom-components/hacs), so that you can easily track and download updates.
 
-Alternatively, you can download the `act_garbage` directory from inside the `apps` directory here to your
-local `apps` directory, then add the configuration to enable the `act_garbage` module.
+Alternatively, you can download the `act_garbage` directory from inside the `apps` directory here to your local `apps` directory, then add the configuration to enable the `act_garbage` module.
 
 ## How it works
 
-The [ACT Open Data](https://www.data.act.gov.au/Community-Services/ACT-Suburb-Next-Garbage-Recycling-and-Green-Waste-/jzzy-44un) site provides this information, 
-this just makes the information available as sensors in HA.
+The [ACT Open Data](https://www.data.act.gov.au/Community-Services/ACT-Suburb-Next-Garbage-Recycling-and-Green-Waste-/jzzy-44un) site provides this information, this just makes the information available as sensors in HA.
 
-As this is non time critical sensor, it only gets the information on a set time schedule, once per day at 5.27am. It also asks for you to provide an input_boolean that you 
-specify for when to update the sensor on your own time. You can obviously automate when you want that input_boolean to turn on.
+As this is non time critical sensor, it only gets the information on a set time schedule, once per day at 5.27am. It also asks for you to provide an input_boolean that you specify for when to update the sensor on your own time. You can obviously automate when you want that input_boolean to turn on.
 
 ### To Run
 
