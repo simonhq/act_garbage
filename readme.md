@@ -24,14 +24,12 @@ local `apps` directory, then add the configuration to enable the `act_garbage` m
 The [ACT Open Data](https://www.data.act.gov.au/Community-Services/ACT-Suburb-Next-Garbage-Recycling-and-Green-Waste-/jzzy-44un) site provides this information, 
 this just makes the information available as sensors in HA.
 
-As this is non time critical sensor, it does not get the information on a set time schedule, but watches a input_boolean that you 
-specify for when to update the sensor. You can obviously automate when you want that input_boolean to turn on.
+As this is non time critical sensor, it only gets the information on a set time schedule, once per day at 5.27am. It also asks for you to provide an input_boolean that you 
+specify for when to update the sensor on your own time. You can obviously automate when you want that input_boolean to turn on.
 
 ### To Run
 
-You will need to create an input_boolean entity to watch for when to update the sensor. When this
-`input_boolean` is turned on, whether manually or by another automation you
-create, the scraping process will be run to create/update the sensor.
+You will need to create an input_boolean entity to watch for when to update the sensor. When this `input_boolean` is turned on, whether manually or by another automation you create, the scraping process will be run to create/update the sensor.
 
 ## AppDaemon Libraries
 

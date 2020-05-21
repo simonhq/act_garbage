@@ -71,6 +71,10 @@ class Get_ACT_Garbage(hass.Hass):
         # listen to HA for the flag to update the sensor
         self.listen_state(self.main, self.GAR_FLAG, new="on")
 
+        # set to run each morning at 5.27am
+        runtime = datatime.time(5,27,0)
+        self.run_daily(self.load, runtime)
+
     # run the app
     def main(self, entity, attribute, old, new, kwargs):
         """ create the sensor and turn off the flag
