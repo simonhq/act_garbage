@@ -72,7 +72,7 @@ class Get_ACT_Garbage(hass.Hass):
         self.listen_state(self.main, self.GAR_FLAG, new="on")
 
         # set to run each morning at 5.27am
-        runtime = datatime.time(5,27,0)
+        runtime = datetime.time(5,27,0)
         self.run_daily(self.load, runtime)
 
     # run the app
