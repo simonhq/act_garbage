@@ -5,7 +5,7 @@
 # written to be run from AppDaemon for a HASS or HASSIO install
 #
 # updated: 09/05/2020
-# 
+# added topics
 ############################################################
 
 ############################################################
